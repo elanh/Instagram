@@ -24,6 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://nameless-ravine-97027.herokuapp.com/parse"
             })
         )
+        if PFUser.current() != nil {
+            // if there is a logged in user then load the home view controller
+            if let currentUser = PFUser.current() {
+                print("Welcome back \(currentUser.username!) 😊")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let feedViewController = storyboard.instantiateViewController(withIdentifier: "feedViewController")
+                window?.rootViewController = feedViewController
+            }
+        }
+
         return true
     }
     

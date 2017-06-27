@@ -8,14 +8,41 @@
 
 import UIKit
 
-class PhotoMapViewController: UIViewController {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.camera
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("Camera is avaliable 📸")
+            imagePickerController.sourceType = .camera
+            self.present(imagePickerController, animated: true, completion: nil)
+        } else {
+            print("Camera 🚫 available so we will use photo library instead")
+            imagePickerController.sourceType = .photoLibrary
+        }
         // Do any additional setup after loading the view.
     }
 
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let origionalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        //TODO: do something with the images
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

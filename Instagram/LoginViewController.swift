@@ -4,7 +4,6 @@
 //
 //  Created by Elan Halpern on 6/27/17.
 //  Copyright © 2017 Elan Halpern. All rights reserved.
-//
 
 import UIKit
 import Parse

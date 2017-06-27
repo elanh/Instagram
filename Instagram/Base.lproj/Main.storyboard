@@ -57,30 +57,73 @@
                     <connections>
                         <outlet property="passwordField" destination="675-xC-f2y" id="cXY-jt-sXp"/>
                         <outlet property="userNameField" destination="esY-99-yD0" id="rev-Tk-q10"/>
-                        <segue destination="a9D-UN-c61" kind="presentation" identifier="loginSegue" id="cnJ-hd-PAc"/>
+                        <segue destination="3Pf-uP-EOs" kind="presentation" identifier="loginSegue" id="1V1-5Y-LBZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="w9Q-LL-htL">
+        <!--Feed View Controller-->
+        <scene sceneID="Kzc-5X-GEh">
             <objects>
-                <viewController id="a9D-UN-c61" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="feedViewController" id="oYA-qu-QFf" customClass="feedViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ckq-71-1Ad"/>
-                        <viewControllerLayoutGuide type="bottom" id="6x6-sZ-3Tr"/>
+                        <viewControllerLayoutGuide type="top" id="FZg-sY-if7"/>
+                        <viewControllerLayoutGuide type="bottom" id="kcR-Ed-r2A"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6gq-SX-91b">
+                    <view key="view" contentMode="scaleToFill" id="grZ-cD-QAv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sz8-hQ-31h">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="mSg-Mn-oCP">
+                            <connections>
+                                <action selector="onLogout:" destination="oYA-qu-QFf" id="8Xx-En-sm0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dhl-mQ-7ru" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1727.2" y="136.28185907046478"/>
+        </scene>
+        <!--Photo Map View Controller-->
+        <scene sceneID="7LE-Yd-WKu">
+            <objects>
+                <viewController id="gYc-sd-mjH" customClass="PhotoMapViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EXn-aT-FOg"/>
+                        <viewControllerLayoutGuide type="bottom" id="oJc-4C-m36"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jy3-0n-t5i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="in8-aZ-MtT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aiI-Po-87C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="806" y="137"/>
+            <point key="canvasLocation" x="2418.4000000000001" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Btx-Ab-D7C">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Pf-uP-EOs" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eAy-uZ-UbC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oYA-qu-QFf" kind="relationship" relationship="rootViewController" id="PGh-sE-qQh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K8d-d7-4l7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="788" y="136.28185907046478"/>
         </scene>
     </scenes>
 </document>
