@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var tabBarController: UITabBarController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -30,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Welcome back \(currentUser.username!) 😊")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 
-                let feedViewController = storyboard.instantiateViewController(withIdentifier: "feedViewController") as! UITabBarController
-                window?.rootViewController = feedViewController
+                tabBarController = storyboard.instantiateViewController(withIdentifier: "feedViewController") as! UITabBarController
+                window?.rootViewController = tabBarController
             }
         }
 

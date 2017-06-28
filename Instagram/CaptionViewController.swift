@@ -12,10 +12,12 @@ class CaptionViewController: UIViewController {
 
     @IBOutlet weak var photoToPost: UIImageView!
     
+    var imageToPost: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        photoToPost.image =
+        photoToPost.image = imageToPost
     }
 
     override func didReceiveMemoryWarning() {

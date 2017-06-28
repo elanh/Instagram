@@ -18,7 +18,11 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
 
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
-
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             print("Camera is avaliable 📸")
@@ -29,13 +33,23 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
         }
-        // Do any additional setup after loading the view.
     }
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let origionalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         imageToPost.image = origionalImage
+        
+        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //appDelegate.tabBarController.selectedIndex = 0
+        
+        //How can I dismiss so it goes back to the feed????
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.tabBarController.selectedIndex = 0
         
         dismiss(animated: true, completion: nil)
     }
@@ -57,15 +71,9 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let captionViewController = segue.destination as! CaptionViewController
+        captionViewController.imageToPost = imageToPost.image
     }
-    */
 
 }
