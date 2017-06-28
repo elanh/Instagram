@@ -10,13 +10,15 @@ import UIKit
 
 class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var imageToPost: UIImageView!
+    var imagePickerController: UIImagePickerController = UIImagePickerController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.camera
+
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             print("Camera is avaliable 📸")
@@ -25,6 +27,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         } else {
             print("Camera 🚫 available so we will use photo library instead")
             imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
         }
         // Do any additional setup after loading the view.
     }
@@ -32,13 +35,19 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let origionalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        //TODO: do something with the images
+        imageToPost.image = origionalImage
         
         dismiss(animated: true, completion: nil)
     }
     
     
+    @IBAction func onCamera(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("Camera is avaliable 📸")
+            imagePickerController.sourceType = .camera
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+    }
     
     
     
