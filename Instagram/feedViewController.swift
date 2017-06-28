@@ -8,30 +8,71 @@
 
 import UIKit
 import Parse
+import ParseUI
 
-class feedViewController: UIViewController {
+class feedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var feedPosts: [PFObject] = []
+    @IBOutlet weak var feedTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        feedTableView.dataSource = self
+        feedTableView.delegate = self
         
-        // Do any additional setup after loading the view.
+        let query = PFQuery(className: "Post")
+       //query.order(byDescending: "_createdAt_")
+        query.includeKey("account")
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                // do something with the array of object returned by the call
+                for post in posts {
+                    self.feedPosts.append(post)
+                }
+                //print(self.feedPosts)
+                self.feedTableView.reloadData()
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return feedPosts.count
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
+        
+        let post = feedPosts[indexPath.row] //ppfobject
+        let caption = post["caption"] as! String //string
+        let image = post["image"] as! PFFile
+        let account = post["account"] as! PFUser
+        
+
+        cell.userNameLabel.text = account.username
+        cell.captionLabel.text = caption
+        cell.postImage.file = image
+        cell.postImage.loadInBackground()
+        
+        return cell
+    }
+
     
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOutInBackground{ (error: Error?) in
             if let error = error {
-               print(error.localizedDescription)
+                print(error.localizedDescription)
             } else {
-            self.dismiss(animated: true, completion: nil)
-            print("Logout sucessful.")
+                self.dismiss(animated: true, completion: nil)
+                print("Logout sucessful.")
             }
         }
     }
+    
+    
     
     /*
      // MARK: - Navigation
