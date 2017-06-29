@@ -10,10 +10,27 @@ import UIKit
 
 class DetailsViewController: UIViewController {
 
+    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var postedPhoto: UIImageView!
+    
+    var username: String!
+    var caption: String!
+    var timestamp: Date!
+    var photo: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        captionLabel.text = caption
+        usernameLabel.text = username
+        postedPhoto.image = photo
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = DateFormatter.Style.long
+        timestampLabel.text = dateformatter.string(from:    timestamp)
+        
     }
 
     override func didReceiveMemoryWarning() {

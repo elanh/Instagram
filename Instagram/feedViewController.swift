@@ -19,6 +19,9 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var feedTableView: UITableView!
     var refreshControl: UIRefreshControl!
     var choosenImage: UIImage!
+    var username: String!
+    var captionText: String!
+    var datePosted: Date!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +79,11 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let image = post["image"] as! PFFile
         let account = post["account"] as! PFUser
         
-
+        
+        username = account.username
+        captionText = caption
+        datePosted = post.createdAt
+        
         cell.userNameLabel.text = account.username
         cell.captionLabel.text = caption
         cell.postImage.file = image
@@ -120,7 +127,15 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let photoMapViewController = segue.destination as! PhotoMapViewController
             photoMapViewController.chosenImage = choosenImage
             photoMapViewController.isFromCamera = true
+        } else if (segue.identifier == "detailsSegue") {
+            let detailsViewController = segue.destination as! DetailsViewController
+            print("chaning to details view")
+            detailsViewController.photo = choosenImage
+            detailsViewController.caption = captionText
+            detailsViewController.username = username
+            detailsViewController.timestamp = datePosted
         }
+        
     }
     
 }
