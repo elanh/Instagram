@@ -10,11 +10,13 @@ import UIKit
 import Parse
 import ParseUI
 
-class feedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class feedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var imagePickerController: UIImagePickerController = UIImagePickerController()
     var feedPosts: [PFObject] = []
     @IBOutlet weak var feedTableView: UITableView!
     var refreshControl: UIRefreshControl!
+    var choosenImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,8 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         feedTableView.insertSubview(refreshControl, at: 0)
         
-        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
     }
     
     func refresh() {
@@ -83,21 +86,32 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    @IBAction func onCamera(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("Camera is avaliable 📸")
+            imagePickerController.sourceType = .camera
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+    
+    //TODO: PERFORM SEGUE ONCE "CHOOSE" IS CLICKED
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
+        // Get the image captured by the UIImagePickerController
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        choosenImage = originalImage
+        dismiss(animated: true, completion: nil)
+        //need this to execute once we click "choose"
+        performSegue(withIdentifier: "cameraSegue", sender: nil)
+    }
     
     func refreshControlAction(_refreshControl: UIRefreshControl) {
         refresh()
     }
     
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let photoMapViewController = segue.destination as! PhotoMapViewController
+        photoMapViewController.imageToPost.image = choosenImage
+    }
     
 }
