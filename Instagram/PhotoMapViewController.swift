@@ -9,21 +9,29 @@
 import UIKit
 
 class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var imageToPost: UIImageView!
     var imagePickerController: UIImagePickerController = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
+        
+        loadImagePicker()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        if imageToPost.image == UIImage(named: "imageName") {
+            print("we shoudl load image picker now")
+            loadImagePicker()
+        }
         
+    }
+    
+    func loadImagePicker() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             print("Camera is avaliable 📸")
             imagePickerController.sourceType = .camera
@@ -40,10 +48,6 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let origionalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         imageToPost.image = origionalImage
         
-        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //appDelegate.tabBarController.selectedIndex = 0
-        
-        //How can I dismiss so it goes back to the feed????
         dismiss(animated: true, completion: nil)
     }
     
@@ -75,5 +79,5 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let captionViewController = segue.destination as! CaptionViewController
         captionViewController.imageToPost = imageToPost.image
     }
-
+    
 }

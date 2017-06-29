@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Welcome back \(currentUser.username!) 😊")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 
-                tabBarController = storyboard.instantiateViewController(withIdentifier: "feedViewController") as! UITabBarController
+                tabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
                 window?.rootViewController = tabBarController
             }
         }
