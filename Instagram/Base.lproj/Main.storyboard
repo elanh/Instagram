@@ -121,6 +121,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="sz8-hQ-31h">
+                        <barButtonItem key="leftBarButtonItem" image="Camera-01-48" id="Wg4-gt-8Ok">
+                            <connections>
+                                <action selector="onCamera:" destination="oYA-qu-QFf" id="d9d-7B-eD8"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="mSg-Mn-oCP">
                             <connections>
                                 <action selector="onLogout:" destination="oYA-qu-QFf" id="8Xx-En-sm0"/>
@@ -129,69 +134,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="feedTableView" destination="O1M-sA-08d" id="reF-7M-mIg"/>
+                        <segue destination="gYc-sd-mjH" kind="show" identifier="cameraSegue" id="vcl-4V-rtg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhl-mQ-7ru" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="288.80000000000001" y="1675.4122938530736"/>
-        </scene>
-        <!--Picker View Controller-->
-        <scene sceneID="I9z-US-5Ye">
-            <objects>
-                <viewController id="7sz-7W-ecq" customClass="PickerViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fon-wt-8G2"/>
-                        <viewControllerLayoutGuide type="bottom" id="9VY-5c-SpL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="izD-HH-pur">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYn-dd-KfU">
-                                <rect key="frame" x="151" y="344" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Library"/>
-                                <connections>
-                                    <action selector="tapLibrary:" destination="7sz-7W-ecq" eventType="touchUpInside" id="wzG-pt-5p4"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqe-vk-obd">
-                                <rect key="frame" x="148" y="257" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Camera"/>
-                                <connections>
-                                    <action selector="tapCamera:" destination="7sz-7W-ecq" eventType="touchUpInside" id="zOh-Ds-2Wm"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="kmP-zp-8oG"/>
-                    <connections>
-                        <segue destination="gYc-sd-mjH" kind="show" identifier="PickerSegue" id="CkA-dD-5aP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SNW-Pa-Zdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1414" y="1675"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ebJ-eM-bLh">
-            <objects>
-                <viewController id="bwT-xW-LGb" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Uie-M6-Bv8"/>
-                        <viewControllerLayoutGuide type="bottom" id="god-OP-fLH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BFv-mu-Rs6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cc1-uW-cdm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="272" y="2397"/>
         </scene>
         <!--Choose Image-->
         <scene sceneID="7LE-Yd-WKu">
@@ -225,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aiI-Po-87C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1414" y="2401"/>
+            <point key="canvasLocation" x="1414" y="1675"/>
         </scene>
         <!--Add Caption-->
         <scene sceneID="u2I-ia-04e">
@@ -278,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WT3-hn-Z9j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1414" y="3059"/>
+            <point key="canvasLocation" x="1414" y="2463"/>
         </scene>
         <!--Feed-->
         <scene sceneID="Btx-Ab-D7C">
@@ -331,7 +279,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="7sz-7W-ecq" kind="relationship" relationship="rootViewController" id="czv-C3-FOT"/>
+                        <segue destination="gYc-sd-mjH" kind="relationship" relationship="rootViewController" id="HpM-xf-WnP"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w69-Wz-ECa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -377,4 +325,10 @@
             <point key="canvasLocation" x="2180" y="896"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Camera-01-48" width="48" height="48"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vcl-4V-rtg"/>
+    </inferredMetricsTieBreakers>
 </document>
