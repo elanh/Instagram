@@ -338,10 +338,10 @@
             </objects>
             <point key="canvasLocation" x="1414" y="897"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="djh-PC-lGL">
             <objects>
-                <viewController id="aMk-1K-1eA" sceneMemberID="viewController">
+                <viewController id="aMk-1K-1eA" customClass="ProfileViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Umh-5S-lYt"/>
                         <viewControllerLayoutGuide type="bottom" id="kcN-QZ-pTq"/>
