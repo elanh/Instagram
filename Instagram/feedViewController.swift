@@ -14,28 +14,43 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var feedPosts: [PFObject] = []
     @IBOutlet weak var feedTableView: UITableView!
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         feedTableView.dataSource = self
         feedTableView.delegate = self
+        refresh()
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: UIControlEvents.valueChanged)
+        
+        feedTableView.insertSubview(refreshControl, at: 0)
+        
+        
+    }
+    
+    func refresh() {
         let query = PFQuery(className: "Post")
-       //query.order(byDescending: "_createdAt_")
+        //query.limit = 20
+        query.order(byDescending: "_created_at")
         query.includeKey("account")
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
                 // do something with the array of object returned by the call
+                self.feedPosts.removeAll()
                 for post in posts {
                     self.feedPosts.append(post)
                 }
                 //print(self.feedPosts)
                 self.feedTableView.reloadData()
+                self.refreshControl.endRefreshing()
             } else {
                 print(error?.localizedDescription)
             }
+
         }
-        
+        print("refreshing")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,14 +77,15 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     @IBAction func onLogout(_ sender: Any) {
-        PFUser.logOutInBackground{ (error: Error?) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                self.dismiss(animated: true, completion: nil)
-                print("Logout sucessful.")
-            }
-        }
+        self.dismiss(animated: true, completion: nil)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.loggedOut()
+        
+    }
+    
+    
+    func refreshControlAction(_refreshControl: UIRefreshControl) {
+        refresh()
     }
     
     

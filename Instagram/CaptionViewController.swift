@@ -14,18 +14,17 @@ class CaptionViewController: UIViewController {
     
     @IBOutlet weak var photoToPost: UIImageView!
     
-    var imageToPost = UIImage(named: "imageName")
+    var imageToPost: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoToPost.image = imageToPost
+        let newImage = resize(image: imageToPost, newSize: CGSize(width: 640, height: 640))
+        photoToPost.image = newImage
     }
     
     @IBAction func onPost(_ sender: Any) {
         Post.postUserImage(image: photoToPost.image, withCaption: captionTextField.text) { (success: Bool, error: Error?) in
             print("Image posted.")
-            self.imageToPost = UIImage(named: "imageName")
-            self.captionTextField.text = ""
         }
         
         //Return to feed page after the user makes a post
@@ -34,6 +33,17 @@ class CaptionViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        let resizeImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        resizeImageView.contentMode = UIViewContentMode.scaleAspectFill
+        resizeImageView.image = image
+        
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

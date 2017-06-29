@@ -8,65 +8,25 @@
 
 import UIKit
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate {
+    
+    var chosenImage: UIImage!
     
     @IBOutlet weak var imageToPost: UIImageView!
-    var imagePickerController: UIImagePickerController = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
         
-        loadImagePicker()
-        
+        tabBarController?.delegate = self
+        imageToPost.image = chosenImage
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if imageToPost.image == UIImage(named: "imageName") {
-            print("we shoudl load image picker now")
-            loadImagePicker()
-        }
-        
-    }
-    
-    func loadImagePicker() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            print("Camera is avaliable 📸")
-            imagePickerController.sourceType = .camera
-            self.present(imagePickerController, animated: true, completion: nil)
-        } else {
-            print("Camera 🚫 available so we will use photo library instead")
-            imagePickerController.sourceType = .photoLibrary
-            self.present(imagePickerController, animated: true, completion: nil)
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 1 {
+//            loadImagePicker()
         }
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        let origionalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        imageToPost.image = origionalImage
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.tabBarController.selectedIndex = 0
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func onCamera(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            print("Camera is avaliable 📸")
-            imagePickerController.sourceType = .camera
-            self.present(imagePickerController, animated: true, completion: nil)
-        }
-    }
-    
     
     
     

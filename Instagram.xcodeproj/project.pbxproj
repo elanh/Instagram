@@ -22,6 +22,7 @@
 		93D25EE81F032FD20001FE23 /* CaptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D25EE71F032FD20001FE23 /* CaptionViewController.swift */; };
 		93D25EEA1F040E520001FE23 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D25EE91F040E520001FE23 /* Post.swift */; };
 		93D25EEC1F042E6D0001FE23 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D25EEB1F042E6D0001FE23 /* PostCell.swift */; };
+		93D25EEE1F0475B90001FE23 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D25EED1F0475B90001FE23 /* PickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		93D25EE71F032FD20001FE23 /* CaptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptionViewController.swift; sourceTree = "<group>"; };
 		93D25EE91F040E520001FE23 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		93D25EEB1F042E6D0001FE23 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		93D25EED1F0475B90001FE23 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		A3FC2A7E9D238D48DA240E5C /* Pods-InstagramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AF69B602638D362F5A68F006 /* Pods-InstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramTests/Pods-InstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B1C465585A26BB48B90E2587 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				93D25EB31F02F4340001FE23 /* AppDelegate.swift */,
 				93D25EB71F02F4340001FE23 /* Main.storyboard */,
+				93D25EED1F0475B90001FE23 /* PickerViewController.swift */,
 				93D25EBA1F02F4350001FE23 /* Assets.xcassets */,
 				93D25EBC1F02F4350001FE23 /* LaunchScreen.storyboard */,
 				93D25EBF1F02F4350001FE23 /* Info.plist */,
@@ -257,6 +260,7 @@
 				TargetAttributes = {
 					93D25EAF1F02F4340001FE23 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 2B5B8V98QF;
 						ProvisioningStyle = Automatic;
 					};
 					93D25EC31F02F4350001FE23 = {
@@ -463,6 +467,7 @@
 			files = (
 				93D25EEC1F042E6D0001FE23 /* PostCell.swift in Sources */,
 				93D25EE41F030D820001FE23 /* feedViewController.swift in Sources */,
+				93D25EEE1F0475B90001FE23 /* PickerViewController.swift in Sources */,
 				93D25EE21F02FB390001FE23 /* LoginViewController.swift in Sources */,
 				93D25EE61F0313340001FE23 /* PhotoMapViewController.swift in Sources */,
 				93D25EEA1F040E520001FE23 /* Post.swift in Sources */,
@@ -620,6 +625,7 @@
 			baseConfigurationReference = B1C465585A26BB48B90E2587 /* Pods-Instagram.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2B5B8V98QF;
 				INFOPLIST_FILE = Instagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.elan.Instagram;
@@ -633,6 +639,7 @@
 			baseConfigurationReference = 8FC39FB3E56D5420F823B3F2 /* Pods-Instagram.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2B5B8V98QF;
 				INFOPLIST_FILE = Instagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.elan.Instagram;
