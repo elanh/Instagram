@@ -22,15 +22,12 @@ class CaptionViewController: UIViewController {
         photoToPost.image = newImage
     }
     
-    @IBAction func onPost(_ sender: Any) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         Post.postUserImage(image: photoToPost.image, withCaption: captionTextField.text) { (success: Bool, error: Error?) in
             print("Image posted.")
+            
         }
-        
-        //Return to feed page after the user makes a post
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.tabBarController.selectedIndex = 0
-        dismiss(animated: true, completion: nil)
     }
     
     func resize(image: UIImage, newSize: CGSize) -> UIImage {

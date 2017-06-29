@@ -12,6 +12,8 @@ import ParseUI
 
 class feedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    
+    
     var imagePickerController: UIImagePickerController = UIImagePickerController()
     var feedPosts: [PFObject] = []
     @IBOutlet weak var feedTableView: UITableView!
@@ -31,6 +33,11 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("view should refresh now")
+        refresh()
     }
     
     func refresh() {
@@ -97,11 +104,9 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
     //TODO: PERFORM SEGUE ONCE "CHOOSE" IS CLICKED
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
-        // Get the image captured by the UIImagePickerController
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         choosenImage = originalImage
         dismiss(animated: true, completion: nil)
-        //need this to execute once we click "choose"
         performSegue(withIdentifier: "cameraSegue", sender: nil)
     }
     
@@ -109,9 +114,13 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         refresh()
     }
     
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let photoMapViewController = segue.destination as! PhotoMapViewController
-        photoMapViewController.imageToPost.image = choosenImage
+        if(segue.identifier == "cameraSegue") {
+            let photoMapViewController = segue.destination as! PhotoMapViewController
+            photoMapViewController.chosenImage = choosenImage
+            photoMapViewController.isFromCamera = true
+        }
     }
     
 }

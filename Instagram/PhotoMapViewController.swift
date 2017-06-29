@@ -10,6 +10,7 @@ import UIKit
 
 class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate {
     
+    var isFromCamera: Bool!
     var chosenImage: UIImage!
     var imagePickerController: UIImagePickerController = UIImagePickerController()
     
@@ -17,7 +18,11 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadImagePicker()
+        if(!isFromCamera) {
+            loadImagePicker()
+        } else {
+            isFromCamera = false
+        }
         
         tabBarController?.delegate = self
         imageToPost.image = chosenImage
