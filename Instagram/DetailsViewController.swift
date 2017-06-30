@@ -7,29 +7,32 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class DetailsViewController: UIViewController {
 
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var postedPhoto: UIImageView!
+    @IBOutlet weak var postedPhoto: PFImageView!
     
-    var username: String!
-    var caption: String!
+    var post: PFObject!
     var timestamp: Date!
-    var photo: UIImage!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        captionLabel.text = caption
-        usernameLabel.text = username
-        postedPhoto.image = photo
-        
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = DateFormatter.Style.long
         timestampLabel.text = dateformatter.string(from:    timestamp)
+        
+        captionLabel.text = post["caption"] as! String
+        let user = post["account"] as! PFUser
+        usernameLabel.text = user.username
+        postedPhoto.file = post["image"] as! PFFile
+        
         
     }
 

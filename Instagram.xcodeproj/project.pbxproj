@@ -10,6 +10,7 @@
 		5EC0BA0D45658DD2C6BF185A /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FA032AC234A68614F0EAB0 /* Pods_Instagram.framework */; };
 		61765D605B1C68D2A8D00BB9 /* Pods_InstagramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB6BBB3B1147E3579C238A4B /* Pods_InstagramTests.framework */; };
 		648CD408D0D038D0A8666980 /* Pods_InstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C440F1CB9D827371A7A22CC0 /* Pods_InstagramUITests.framework */; };
+		933B59731F05BAA6001271F3 /* photoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933B59721F05BAA6001271F3 /* photoCell.swift */; };
 		93D25EB41F02F4340001FE23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D25EB31F02F4340001FE23 /* AppDelegate.swift */; };
 		93D25EB91F02F4340001FE23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D25EB71F02F4340001FE23 /* Main.storyboard */; };
 		93D25EBB1F02F4350001FE23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93D25EBA1F02F4350001FE23 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		26FA032AC234A68614F0EAB0 /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FC39FB3E56D5420F823B3F2 /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
+		933B59721F05BAA6001271F3 /* photoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = photoCell.swift; sourceTree = "<group>"; };
 		93D25EB01F02F4340001FE23 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D25EB31F02F4340001FE23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93D25EB81F02F4340001FE23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				93D25EEB1F042E6D0001FE23 /* PostCell.swift */,
 				93D25EE91F040E520001FE23 /* Post.swift */,
+				933B59721F05BAA6001271F3 /* photoCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933B59731F05BAA6001271F3 /* photoCell.swift in Sources */,
 				93D25EEC1F042E6D0001FE23 /* PostCell.swift in Sources */,
 				93D25EE41F030D820001FE23 /* feedViewController.swift in Sources */,
 				93D25EF41F05A3670001FE23 /* DetailsViewController.swift in Sources */,

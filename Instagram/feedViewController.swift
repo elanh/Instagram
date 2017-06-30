@@ -61,7 +61,7 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else {
                 print(error?.localizedDescription)
             }
-
+            
         }
         print("refreshing")
     }
@@ -91,7 +91,7 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return cell
     }
-
+    
     
     @IBAction func onLogout(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -121,7 +121,7 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         refresh()
     }
     
- 
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "cameraSegue") {
             let photoMapViewController = segue.destination as! PhotoMapViewController
@@ -129,11 +129,16 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
             photoMapViewController.isFromCamera = true
         } else if (segue.identifier == "detailsSegue") {
             let detailsViewController = segue.destination as! DetailsViewController
-            print("chaning to details view")
-            detailsViewController.photo = choosenImage
-            detailsViewController.caption = captionText
-            detailsViewController.username = username
-            detailsViewController.timestamp = datePosted
+            let cell = sender as! UITableViewCell
+            if let indexPath = feedTableView.indexPath(for: cell) {
+                let post = feedPosts[indexPath.row]
+                detailsViewController.post = post
+                detailsViewController.timestamp = datePosted
+                //feedTableView.diselectRow(at: indexPath, animated: true)
+                
+                
+            }
+            
         }
         
     }
