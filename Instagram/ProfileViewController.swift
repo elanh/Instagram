@@ -36,7 +36,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         let image = post["image"] as! PFFile
         let account = post["account"] as! PFUser
         
-        usernameTitle.prompt = account.username
+        usernameTitle.title = account.username
+        
         cell.photoImageView.file = image
         cell.photoImageView.loadInBackground()
         

@@ -134,7 +134,6 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let post = feedPosts[indexPath.row]
                 detailsViewController.post = post
                 detailsViewController.timestamp = datePosted
-                //feedTableView.diselectRow(at: indexPath, animated: true)
                 
                 
             }
