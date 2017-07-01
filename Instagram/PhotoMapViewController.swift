@@ -18,7 +18,6 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(isFromCamera)
         if(!isFromCamera) {
             loadImagePicker()
         } else {

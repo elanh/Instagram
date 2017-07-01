@@ -8,21 +8,45 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 
-class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,
+UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
 
     @IBOutlet weak var usernameTitle: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var profileImageView: PFImageView!
+   
+    @IBOutlet weak var usernameLabel: UILabel!
     var feedPosts: [PFObject] = []
+    var imagePickerController: UIImagePickerController = UIImagePickerController()
+    var profilePicture: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profileImageView.layer.cornerRadius = 37
+        profileImageView.clipsToBounds = true
+        
+        if let user = PFUser.current() {
+            profileImageView.file = user["profilePicture"] as? PFFile
+            profileImageView.loadInBackground()
+        }
+       
+        
         refresh()
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return feedPosts.count
     }
@@ -31,11 +55,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! photoCell
         
-        let post = feedPosts[indexPath.row] //ppfobject
-        //let caption = post["caption"] as! String //string
+        let post = feedPosts[indexPath.row]
         let image = post["image"] as! PFFile
         let account = post["account"] as! PFUser
         
+        usernameLabel.text = account.username
         usernameTitle.title = account.username
         
         cell.photoImageView.file = image
@@ -44,7 +68,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         return cell
     }
     
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -52,7 +76,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func refresh() {
-
+        
         let query = PFQuery(className: "Post")
         query.order(byDescending: "_created_at")
         query.whereKey("account", equalTo: PFUser.current()!)
@@ -69,14 +93,24 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    @IBAction func onChangeProfPic(_ sender: Any) {
+        imagePickerController.sourceType = .photoLibrary
+        self.present(imagePickerController, animated: true, completion: nil)
     }
-    */
-
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        if let user = PFUser.current() {
+            user["profilePicture"] = Post.getPFFileFromImage(image: originalImage)
+        }
+        profilePicture = originalImage
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
 }

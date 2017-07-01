@@ -13,6 +13,7 @@ import ParseUI
 class feedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
+    @IBOutlet weak var profilePictureButton: UIButton!
     
     var imagePickerController: UIImagePickerController = UIImagePickerController()
     var feedPosts: [PFObject] = []
@@ -28,6 +29,7 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         feedTableView.dataSource = self
         feedTableView.delegate = self
         refresh()
+    
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: UIControlEvents.valueChanged)
@@ -39,7 +41,6 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("view should refresh now")
         refresh()
     }
     
@@ -55,7 +56,7 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 for post in posts {
                     self.feedPosts.append(post)
                 }
-                //print(self.feedPosts)
+
                 self.feedTableView.reloadData()
                 self.refreshControl.endRefreshing()
             } else {
@@ -63,7 +64,6 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
         }
-        print("refreshing")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,11 +78,18 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let caption = post["caption"] as! String //string
         let image = post["image"] as! PFFile
         let account = post["account"] as! PFUser
+        if let profilePicture = account["profilePicture"] as? PFFile {
+            cell.profilePictureView.file = profilePicture
+            cell.profilePictureView.loadInBackground()
+        } else {
+            print("can't get profile picture")
+        }
         
         
         username = account.username
         captionText = caption
         datePosted = post.createdAt
+
         
         cell.userNameLabel.text = account.username
         cell.captionLabel.text = caption
@@ -92,6 +99,7 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+
     
     @IBAction func onLogout(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -108,7 +116,7 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    //TODO: PERFORM SEGUE ONCE "CHOOSE" IS CLICKED
+
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage

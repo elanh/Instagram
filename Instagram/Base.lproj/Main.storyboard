@@ -115,10 +115,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gok-lq-hNq" userLabel="Profile Picture">
-                                                    <rect key="frame" x="8" y="0.0" width="30" height="24"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_tab" translatesAutoresizingMaskIntoConstraints="NO" id="Ggb-JL-omw" customClass="PFImageView">
+                                                    <rect key="frame" x="4" y="2" width="38" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button" image="profile_tab"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gok-lq-hNq" userLabel="Profile Picture">
+                                                    <rect key="frame" x="4" y="2" width="91" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <segue destination="aMk-1K-1eA" kind="show" id="wl2-Ym-48L"/>
                                                     </connections>
@@ -128,6 +131,8 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="EIR-cX-IvK" id="5a9-VZ-Fh9"/>
                                             <outlet property="postImage" destination="rPo-l4-Yti" id="ku4-tk-6ou"/>
+                                            <outlet property="profilePictureButton" destination="gok-lq-hNq" id="rIB-Th-miL"/>
+                                            <outlet property="profilePictureView" destination="Ggb-JL-omw" id="Ea8-eu-444"/>
                                             <outlet property="userNameLabel" destination="Xem-Vg-wNL" id="mWE-6g-nsG"/>
                                             <segue destination="ksD-DO-h2c" kind="show" identifier="detailsSegue" id="dUk-LG-QR1"/>
                                         </connections>
@@ -371,9 +376,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9B6-R1-YG5">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JV4-A5-SIZ">
+                                <rect key="frame" x="93" y="20" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7U-gW-XtR">
+                                <rect key="frame" x="98" y="42" width="154" height="30"/>
+                                <state key="normal" title="Change Profile Picture"/>
+                                <connections>
+                                    <action selector="onChangeProfPic:" destination="aMk-1K-1eA" eventType="touchUpInside" id="iDy-v7-cFT"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9B6-R1-YG5">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qQB-5t-Utz">
                                     <size key="itemSize" width="118" height="118"/>
@@ -389,30 +406,58 @@
                                             <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgd-Tp-EPc" customClass="PFImageView">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zgd-Tp-EPc" customClass="PFImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="116" height="116"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="zgd-Tp-EPc" firstAttribute="top" secondItem="fCz-ZA-LyJ" secondAttribute="top" id="7Jd-rD-h4x"/>
+                                            <constraint firstItem="zgd-Tp-EPc" firstAttribute="leading" secondItem="fCz-ZA-LyJ" secondAttribute="leading" id="OZo-mC-Rgu"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="zgd-Tp-EPc" secondAttribute="bottom" constant="-6" id="RZ6-gL-lQk"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="zgd-Tp-EPc" secondAttribute="trailing" constant="-6" id="jp2-yo-TIq"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="photoImageView" destination="zgd-Tp-EPc" id="rqx-Hx-acJ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_tab" translatesAutoresizingMaskIntoConstraints="NO" id="LEy-g3-Zfz" customClass="PFImageView">
+                                <rect key="frame" x="8" y="26" width="74" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="4FA-XL-aiT"/>
+                                    <constraint firstAttribute="height" constant="74" id="D27-Mm-z6l"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="74" id="hw2-EE-kg3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9B6-R1-YG5" firstAttribute="top" secondItem="LEy-g3-Zfz" secondAttribute="bottom" constant="8" id="8Lz-MJ-6gv"/>
+                            <constraint firstItem="JV4-A5-SIZ" firstAttribute="top" secondItem="Umh-5S-lYt" secondAttribute="bottom" id="Fhq-kh-1pQ"/>
+                            <constraint firstItem="L7U-gW-XtR" firstAttribute="leading" secondItem="LEy-g3-Zfz" secondAttribute="trailing" constant="16" id="PIm-tr-nvb"/>
+                            <constraint firstItem="9B6-R1-YG5" firstAttribute="leading" secondItem="HLQ-F1-Axu" secondAttribute="leadingMargin" constant="-16" id="Ppf-vO-BaZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9B6-R1-YG5" secondAttribute="trailing" constant="-16" id="ZJd-0o-nHj"/>
+                            <constraint firstItem="LEy-g3-Zfz" firstAttribute="top" secondItem="Umh-5S-lYt" secondAttribute="bottom" constant="6" id="dXt-qo-f0l"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="L7U-gW-XtR" secondAttribute="trailing" constant="107" id="fK2-vU-P29"/>
+                            <constraint firstItem="kcN-QZ-pTq" firstAttribute="top" secondItem="9B6-R1-YG5" secondAttribute="bottom" id="ghm-Zb-hPp"/>
+                            <constraint firstItem="LEy-g3-Zfz" firstAttribute="leading" secondItem="HLQ-F1-Axu" secondAttribute="leadingMargin" constant="-8" id="hnJ-8Y-CHx"/>
+                            <constraint firstItem="L7U-gW-XtR" firstAttribute="top" secondItem="JV4-A5-SIZ" secondAttribute="bottom" constant="1" id="qe6-KB-mWa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JV4-A5-SIZ" secondAttribute="trailing" constant="182" id="wdz-V0-Ank"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fRS-ru-YEh"/>
                     <connections>
                         <outlet property="collectionView" destination="9B6-R1-YG5" id="fWp-Nf-hm4"/>
+                        <outlet property="profileImageView" destination="LEy-g3-Zfz" id="Bvz-9W-osM"/>
+                        <outlet property="usernameLabel" destination="JV4-A5-SIZ" id="Six-EV-voq"/>
                         <outlet property="usernameTitle" destination="fRS-ru-YEh" id="QZe-SV-dbh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0tv-bo-Nm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-735.20000000000005" y="1647.5262368815593"/>
+            <point key="canvasLocation" x="-735.5" y="1647.5"/>
         </scene>
         <!--Profile-->
         <scene sceneID="983-dD-wC0">
