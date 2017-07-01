@@ -23,10 +23,10 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var usernameLabel: UILabel!
     var feedPosts: [PFObject] = []
     var imagePickerController: UIImagePickerController = UIImagePickerController()
-    var profilePicture: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refresh()
         
         profileImageView.layer.cornerRadius = 37
         profileImageView.clipsToBounds = true
@@ -37,7 +37,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         }
        
         
-        refresh()
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -45,6 +45,17 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         imagePickerController.allowsEditing = true
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = PFUser.current() {
+            if let file = user["profilePicture"] as? PFFile {
+                profileImageView.file = file
+                profileImageView.loadInBackground()
+            } else {
+                print("could not get profile image")
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -103,9 +114,16 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         if let user = PFUser.current() {
+            profileImageView.image = originalImage
             user["profilePicture"] = Post.getPFFileFromImage(image: originalImage)
+            user.saveInBackground(block: { (sucess: Bool, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("sucess")
+                }
+            })
         }
-        profilePicture = originalImage
         
         dismiss(animated: true, completion: nil)
     }
