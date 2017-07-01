@@ -23,7 +23,7 @@ The following **optional** features are implemented:
 - [ ] After the user submits a new post, show a progress HUD while the post is being uploaded to Parse.
 - [ X] User Profiles:
 - [ X] Allow the logged in user to add a profile photo
-- [ ] Display the profile photo with each post
+- [ X] Display the profile photo with each post
 - [ X] Tapping on a post's username or profile photo goes to that user's profile page
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
 - [ ] User can like a post and see number of likes for each post in the post details screen.
@@ -39,7 +39,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://imgur.com/a/ebIkb' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -52,7 +52,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+There were MANY challenges with this program. I think the hardest part was figuring out how to query and transfer data between view controllers so that every part of the app shares the same information about a user and about a post. The more frustrating part, though, was that most of the bugs that took me the longest to solve were not even major conceptual errors, rather, they were missing a simple line or forgetting an outlet or something. I think this is why it's so helpful to be working with peers who are able to catch errors that you did not pick up on!
 
 ## License
 
